@@ -7,17 +7,17 @@ const companyList: ICompanyModel[] = [
   {
     name: 'ПАО Ростелеком',
     experienceText: '4 years experience',
-    imgUrl: '/rtk_logo.png'
+    imgUrl: './rtk_logo.png'
   },
   {
     name: 'ГК СервисКлауд',
     experienceText: '6 month experience',
-    imgUrl: '/scloud_logo.svg'
+    imgUrl: './scloud_logo.svg'
   },
   {
     name: 'ПАО Росгосстрах',
     experienceText: '5+ years experience',
-    imgUrl: '/rgs_logo.png'
+    imgUrl: './rgs_logo.png'
   }
 ]
 </script>

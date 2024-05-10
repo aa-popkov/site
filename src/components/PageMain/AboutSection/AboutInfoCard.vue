@@ -16,10 +16,10 @@ const toggleShowInfo = () => {
 
 <template>
   <div class="py-4 border-b border-gray-300">
-    <div v-on:click="toggleShowInfo" class="flex items-center justify-between cursor-pointer hover:underline">
-      <h3 class="text-2xl font-bold ">{{ title }}</h3>
+    <div v-on:click="toggleShowInfo" class="flex items-center justify-start cursor-pointer hover:underline relative">
+      <h3 class="text-2xl font-bold mr-8">{{ title }}</h3>
       <ChevronDownIcon :style="{rotate: isShowInfo ? '180deg' : '0deg'}"
-                       class="size-8 text-grey-500 transition-[rotate]" />
+                       class="size-8 text-grey-500 transition-[rotate] absolute right-0" />
     </div>
     <div :style="{maxHeight: isShowInfo ? '1000px' : 0}"
          class="overflow-hidden transition-[max-height] duration-300">

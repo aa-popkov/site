@@ -7,12 +7,11 @@ defineProps({
 </script>
 
 <template>
-  <div class="mx-auto p-5 rounded-xl bg-gray-200 hover:shadow-2xl hover:-translate-y-1 transition w-full sm:w-72">
-    <div class="flex flex-col items-start gap-4">
-      <span class="text-blue-600">{{position}}</span>
-      <span class="text-2xl font-bold">{{companyName}}</span>
-      <span class="text-gray-500">{{description}}</span>
-    </div>
+  <div
+    class="mx-auto flex flex-col gap-2 self-stretch p-5 rounded-xl bg-gray-600 hover:shadow-blue-400 hover:shadow-2xl hover:-translate-y-1 transition w-full sm:w-72">
+    <span class="text-blue-400">{{ position }}</span>
+    <span class="text-2xl font-bold text-gray-50">{{ companyName }}</span>
+    <p class="text-gray-50">{{ description }}</p>
   </div>
 </template>
 
