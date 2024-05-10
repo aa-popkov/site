@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { IExperienceCard } from '@/models/experienceCard'
 import ExpCard from '@/components/PageMain/Skills/ExpCard.vue'
-import SkillsSlider from '@/components/PageMain/Skills/SkillsSlider.vue'
+import SkillSlidersList from '@/components/PageMain/Skills/SkillSlidersList.vue'
 
 const experienceCards: IExperienceCard[] = [
   {
@@ -12,7 +12,7 @@ const experienceCards: IExperienceCard[] = [
   {
     position: 'Cloud Client Support Engineer',
     companyName: 'ГК СервисКлауд',
-    description: 'Virtualization, Cloud Computing, Databases, Monitoring, 1С'
+    description: 'Virtualization VMware, Cloud Computing, Databases, Monitoring, 1С'
   },
   {
     position: 'Employee Support Engineer',
@@ -25,9 +25,7 @@ const experienceCards: IExperienceCard[] = [
     description: 'System development and support: Atlassian, Naumen Service Desk, IDM OneIdentity. Custom projects based on C#, Python, JavaScript and oth.'
   }
 ]
-/*
-* В компании Ростелеком я работал на позиции Network Support Engineer, где получил ценный опыт работы с сетями. За время моей работы я приобрел глубокие знания в области сетевых технологий и протоколов, таких как TCP/IP, OSPF, BGP и MPLS. Я также освоил навыки конфигурации и мониторинга сетевого оборудования, включая маршрутизаторы и коммутаторы. Этот опыт позволил мне развить аналитические способности и научиться быстро решать возникающие проблемы. Кроме того, работа в команде профессионалов дала мне понимание важности коллективной работы и эффективного общения.
-* */
+
 </script>
 
 <template>
@@ -48,12 +46,7 @@ const experienceCards: IExperienceCard[] = [
           :description="card.description"
         />
       </div>
-      <div class="flex items-center flex-wrap px-4 justify-between">
-        <SkillsSlider title="Web Development" :percent="70" />
-        <SkillsSlider title="Problem Solving" :percent="80" />
-        <SkillsSlider title="Software Engineering" :percent="75" />
-        <SkillsSlider title="CI/CD" :percent="50" />
-      </div>
+      <SkillSlidersList/>
     </div>
   </div>
 </template>
