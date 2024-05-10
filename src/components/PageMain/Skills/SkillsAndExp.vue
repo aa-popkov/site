@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IExperienceCard } from '@/models/experienceCard'
 import ExpCard from '@/components/PageMain/Skills/ExpCard.vue'
+import SkillsSlider from '@/components/PageMain/Skills/SkillsSlider.vue'
 
 const experienceCards: IExperienceCard[] = [
   {
@@ -21,7 +22,7 @@ const experienceCards: IExperienceCard[] = [
   {
     position: 'Software Engineer',
     companyName: 'ПАО Росгосстрах',
-    description: 'System development and support: Atlassian, Naumen Service Desk, IDM OneIdentity. Custom projects based on C#, Python, JS React and other technologies'
+    description: 'System development and support: Atlassian, Naumen Service Desk, IDM OneIdentity. Custom projects based on C#, Python, JavaScript and oth.'
   }
 ]
 /*
@@ -34,9 +35,9 @@ const experienceCards: IExperienceCard[] = [
     <div class="2xl:hidden absolute h-full w-screen bg-gray-800 z-10 top-0 left-[-16px]">
     </div>
     <div class="z-20 relative">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-50">
-        <h2 class="text-4xl font-bold w-full md:w-1/2 text-center">My Skills and Expertise</h2>
-        <span class="w-full md:w-1/2">My expertise lies in web development, software engineering, and problem-solving. With years of experience in these fields, I have honed my skills to deliver cutting-edge solutions backed by the latest technologies and design trends. My focus on quality and performance ensures that your web solutions are optimized for success.</span>
+      <div class="flex flex-col xl:flex-row justify-between items-center gap-4 text-gray-50">
+        <h2 class="text-4xl font-bold w-full xl:w-1/2 text-center">My Skills and Expertise</h2>
+        <span class="w-full xl:w-1/2">My expertise lies in web development, software engineering, and problem-solving. With years of experience in these fields, I have honed my skills to deliver cutting-edge solutions backed by the latest technologies and design trends. My focus on quality and performance ensures that your web solutions are optimized for success.</span>
       </div>
       <div class="flex justify-start gap-2 flex-wrap mt-4">
         <ExpCard
@@ -46,6 +47,12 @@ const experienceCards: IExperienceCard[] = [
           :company-name="card.companyName"
           :description="card.description"
         />
+      </div>
+      <div class="flex items-center flex-wrap px-4 justify-between">
+        <SkillsSlider title="Web Development" :percent="70" />
+        <SkillsSlider title="Problem Solving" :percent="80" />
+        <SkillsSlider title="Software Engineering" :percent="75" />
+        <SkillsSlider title="CI/CD" :percent="50" />
       </div>
     </div>
   </div>
