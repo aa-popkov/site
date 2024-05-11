@@ -5,9 +5,9 @@ import { UserCircleIcon } from '@heroicons/vue/24/outline'
 <template>
   <header class="flex justify-between items-center">
     <div>
-      <h2 class="text-2xl cursor-pointer hover:-translate-y-1 transition">Alexey Popkov</h2>
+      <h2 class="text-2xl cursor-pointer hover:-translate-y-1 hover:underline transition font-bold">Alexey Popkov</h2>
     </div>
-    <div class="flex gap-8">
+    <div class="flex gap-8 mx-auto">
       <span>Pricing</span>
       <span>Contact</span>
     </div>
