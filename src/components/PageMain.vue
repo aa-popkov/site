@@ -9,7 +9,7 @@ import SkillsAndExp from '@/components/PageMain/Skills/SkillsAndExp.vue'
   <main>
     <div class="flex items-center flex-col">
       <h2 class="text-5xl text-center py-8 font-bold">Crafting Robust Web Solutions</h2>
-      <img src="/me.png" alt="logo" width="705">
+      <img src="/img/me.png" alt="logo" width="705">
     </div>
     <CompanyCardList/>
     <AboutSection/>

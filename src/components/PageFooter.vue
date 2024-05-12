@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import ContactLinkList from '@/components/PageFooter/ContactLinkList.vue'
 </script>
 
 <template>
@@ -17,26 +18,7 @@
         <span class="text-gray-50">Pricing</span>
         <span class="text-gray-50">Contact</span>
       </div>
-      <div>
-        <ul class="flex gap-2">
-          <li
-            class="border-solid border-2 border-blue-600 rounded-full p-2 cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition">
-            <img class="m-1" src="/tg_icon.svg" alt="tg_icon" width="20" height="20">
-          </li>
-          <li
-            class="border-solid border-2 border-blue-600 rounded-full p-2 cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition">
-            <img class="m-1" src="/in_icon.svg" alt="in_icon" width="20" height="20">
-          </li>
-          <li
-            class="border-solid border-2 border-blue-600 rounded-full p-2 cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition">
-            <img class="m-1" src="/inst_icon.svg" alt="inst_icon" width="20" height="20">
-          </li>
-          <li
-            class="border-solid border-2 border-blue-600 rounded-full p-2 cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition">
-            <img class="m-1" src="/email_icon.svg" alt="email_icon" width="20" height="20">
-          </li>
-        </ul>
-      </div>
+      <ContactLinkList/>
     </div>
   </div>
 </template>
