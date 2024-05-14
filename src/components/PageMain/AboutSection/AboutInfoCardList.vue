@@ -17,8 +17,8 @@ const aboutInfoCards: IAboutCard[] = [
 </script>
 
 <template>
-    <h2 class="text-4xl font-bold py-4">Building Web Solutions with Cutting-edge Technologies</h2>
-    <span class="font-mono text-gray-500 py-4">With 5+ years of experience in web development, I have mastered the art of building web solutions that cater to a diverse range of business needs. My work focuses on custom web development, software engineering, and problem-solving, all backed by the latest technologies and industry standards.</span>
+    <h2 class="text-4xl font-bold py-4 text-balance">Building Web Solutions with Cutting-edge Technologies</h2>
+    <span class="font-mono text-gray-500 py-4 text-balance">With 5+ years of experience in web development, I have mastered the art of building web solutions that cater to a diverse range of business needs. My work focuses on custom web development, software engineering, and problem-solving, all backed by the latest technologies and industry standards.</span>
     <AboutInfoCard
       v-for="card in aboutInfoCards"
       :key="card.title"

@@ -2,6 +2,7 @@
 import AboutSection from '@/components/PageMain/AboutSection/AboutSection.vue'
 import CompanyCardList from '@/components/PageMain/CompanyCardList.vue'
 import SkillsAndExp from '@/components/PageMain/Skills/SkillsAndExp.vue'
+import MasteredSection from '@/components/PageMain/Mastered/MasteredSection.vue'
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import SkillsAndExp from '@/components/PageMain/Skills/SkillsAndExp.vue'
     <CompanyCardList />
     <AboutSection />
     <SkillsAndExp />
+    <MasteredSection/>
   </main>
 </template>
 
