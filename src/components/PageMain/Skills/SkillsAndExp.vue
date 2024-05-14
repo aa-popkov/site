@@ -17,7 +17,7 @@ const experienceCards: IExperienceCard[] = [
   {
     position: 'Employee Support Engineer',
     companyName: 'ПАО Росгосстрах',
-    description: 'Active Directory, VBScript, MS Office'
+    description: 'Active Directory, VBScript, PowerShell, MS Office'
   },
   {
     position: 'Software Engineer',
@@ -29,10 +29,7 @@ const experienceCards: IExperienceCard[] = [
 </script>
 
 <template>
-  <div class="relative bg-gray-800 rounded-xl p-4">
-    <div class="2xl:hidden absolute h-full w-screen bg-gray-800 z-10 top-0 left-[-16px]">
-    </div>
-    <div class="z-20 relative">
+    <div class="bg-gray-800 2xl:rounded-2xl p-4">
       <div class="flex flex-col xl:flex-row justify-between items-center gap-4 text-gray-50">
         <h2 class="text-4xl font-bold w-full xl:w-1/2 text-center">My Skills and Expertise</h2>
         <span class="w-full xl:w-1/2">My expertise lies in web development, software engineering, and problem-solving. With years of experience in these fields, I have honed my skills to deliver cutting-edge solutions backed by the latest technologies and design trends. My focus on quality and performance ensures that your web solutions are optimized for success.</span>
@@ -48,7 +45,6 @@ const experienceCards: IExperienceCard[] = [
       </div>
       <SkillSlidersList/>
     </div>
-  </div>
 </template>
 
 <style scoped>

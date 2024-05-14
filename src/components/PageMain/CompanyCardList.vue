@@ -23,13 +23,9 @@ const companyList: ICompanyModel[] = [
 </script>
 
 <template>
-  <div class="relative">
-    <div class="2xl:hidden absolute h-full w-screen bg-gray-800 z-10 top-0 left-[-16px]">
-    </div>
-    <div class="flex justify-between items-center gap-5 flex-wrap bg-gray-800 px-8 rounded-xl z-20 relative">
+    <div class="flex justify-center lg:justify-between items-center gap-5 flex-wrap bg-gray-800 px-8 2xl:rounded-xl">
       <CompanyCard v-for="company in companyList" :key="company.name" :company="company" />
     </div>
-  </div>
 </template>
 
 <style scoped>

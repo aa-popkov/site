@@ -2,9 +2,11 @@ FROM node:20-alpine3.19 as build
 
 WORKDIR /app
 
+COPY ./package.json /app/package.json
+RUN ["npm", "install"]
+
 COPY . /app
 
-RUN ["npm", "install"]
 RUN ["npm", "run", "build"]
 
 FROM nginx:alpine

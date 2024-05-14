@@ -1,7 +1,6 @@
 <script setup lang="ts">
-
-import CompanyCardList from '@/components/PageMain/CompanyCardList.vue'
 import AboutSection from '@/components/PageMain/AboutSection/AboutSection.vue'
+import CompanyCardList from '@/components/PageMain/CompanyCardList.vue'
 import SkillsAndExp from '@/components/PageMain/Skills/SkillsAndExp.vue'
 </script>
 
@@ -11,9 +10,9 @@ import SkillsAndExp from '@/components/PageMain/Skills/SkillsAndExp.vue'
       <h2 class="text-5xl text-center py-8 font-bold">Crafting Robust Web Solutions</h2>
       <img src="/img/me.png" alt="logo" width="705">
     </div>
-    <CompanyCardList/>
-    <AboutSection/>
-    <SkillsAndExp/>
+    <CompanyCardList />
+    <AboutSection />
+    <SkillsAndExp />
   </main>
 </template>
 
