@@ -8,9 +8,9 @@ import PageFooter from '@/components/PageFooter.vue'
 
     <PageHeader />
     <div class="pb-32 md:pb-24">
-      <RouterView/>
+      <RouterView />
     </div>
-    <PageFooter/>
+    <PageFooter />
 
   </div>
 </template>

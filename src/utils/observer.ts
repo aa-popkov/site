@@ -2,8 +2,8 @@
 export const onIntersect = (
   { elementToWatch, callback, outCallback, once = true, options = { threshold: 1.0 } }: {
     elementToWatch: HTMLElement | any,
-    callback: (target: any ) => {},
-    outCallback: (target: any) => {},
+    callback: (target: any ) => void,
+    outCallback: (target: any) => void,
     once?: boolean,
     options?: IntersectionObserverInit
   }

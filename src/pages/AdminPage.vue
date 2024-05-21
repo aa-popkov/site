@@ -4,7 +4,7 @@
 
 <template>
 <h1>
-  Hello from admin page
+  This page made be available later!
 </h1>
 </template>
 
