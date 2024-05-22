@@ -6,8 +6,8 @@ import MasteredText from '@/components/PageMain/Mastered/MasteredText.vue'
 
 <template>
   <div class="p-4 flex justify-between items-center md:items-start">
-    <MasteredIconList/>
     <MasteredText/>
+    <MasteredIconList/>
   </div>
 </template>
 
