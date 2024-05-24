@@ -5,7 +5,14 @@ import { ref } from 'vue'
 const showDrop = ref(false)
 const toggleDrop = () => {
   showDrop.value = !showDrop.value
-  document.querySelector('body')?.classList.toggle('overflow-hidden')
+  const body = document.querySelector('body')
+  const bodyScrollWidth = window.innerWidth - document.documentElement.clientWidth
+  if(!showDrop.value && body) {
+    body.className = ''
+    return
+  }
+  body?.classList.toggle('overflow-hidden')
+  body?.classList.toggle(`mr-[${bodyScrollWidth}px]`)
 }
 
 </script>
