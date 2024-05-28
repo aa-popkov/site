@@ -43,7 +43,7 @@ provide('toggle', toggleChecked)
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="p-2">
     <CheckboxTreeList :data="data" :level="0" />
   </div>
 </template>

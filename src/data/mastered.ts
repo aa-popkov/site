@@ -25,13 +25,7 @@ export const masteredData: IMasteredIcon[] = [
       },
       {
         title: 'Aiogram',
-        icon: AiogramIcon,
-        children: [
-          {
-            title: 'Fast API',
-            icon: FastApiIcon
-          }
-        ]
+        icon: AiogramIcon
       }
     ]
   },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref, watch } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { isAxiosError } from 'axios'
 import SendIcon from '@/components/Icons/SendIcon.vue'
@@ -8,20 +8,30 @@ import { config } from '@/utils/config'
 import LoaderIcon from '@/components/Icons/LoaderIcon.vue'
 import ExpandSection from '@/components/Shared/ExpandSection.vue'
 import type { TTreeChecked } from '@/models/treeChecked'
+import MessageMasteredList from '@/components/PageContact/MessageMasteredList.vue'
+import { generateCheckedTreeString, isCheckedRecursive } from '@/utils/checkBoxTree'
 
 const baseMsgContent = 'Hi Alexey 👋\n' + "I'm need your expertise, for next:\n"
 
-const secureText = ref(baseMsgContent)
 const msgTitle = ref('')
 const msgTitleLength = ref(0)
+const validTitleLength = computed(() => msgTitleLength.value > 2 && msgTitleLength.value < 256)
+
 const msgContact = ref('')
 const msgContactLength = ref(0)
+const validContactLength = computed(
+  () => msgContactLength.value > 2 && msgContactLength.value < 256
+)
+
+const secureText = ref(baseMsgContent)
 const msgContent = ref(secureText.value)
+
 const isLoading = ref(false)
 const error = ref('')
 const success = ref('')
 
 const checkedList = inject('checkedList') as TTreeChecked[]
+const checkCheckedList = computed(() => checkedList.some((v) => isCheckedRecursive(v)))
 
 const getToken = (): string => {
   let token = localStorage.getItem(config.LOCALSTORAGE_KEYS.clientId)
@@ -68,35 +78,6 @@ const onSubmit = async (e: Event) => {
   }
 }
 
-const isCheckedRecursive = (node: TTreeChecked): boolean => {
-  if (node.checked) return true
-  if (node.children) {
-    for (const child of node.children) {
-      if (isCheckedRecursive(child)) return true
-    }
-  }
-  return false
-}
-
-const generateCheckedTreeString = (tree: TTreeChecked[], depth: number = 0): string => {
-  let result = ''
-
-  for (const node of tree) {
-    if (
-      node.checked ||
-      (node.children && node.children.some((child) => isCheckedRecursive(child)))
-    ) {
-      const spaceSymbol = depth > 0 ? ' ⎿ ' : '• '
-      result += '  '.repeat(depth) + spaceSymbol + node.title + '\n'
-      if (node.children) {
-        result += generateCheckedTreeString(node.children, depth + 1)
-      }
-    }
-  }
-
-  return result
-}
-
 watch(checkedList, (value) => {
   secureText.value = baseMsgContent
   secureText.value += generateCheckedTreeString(value)
@@ -113,55 +94,63 @@ watch(msgContact, (value) => {
 </script>
 
 <template>
-  <div>
-    <form method="post" class="bg-gray-800 rounded-2xl flex flex-col p-4 gap-2" @submit="onSubmit">
-      <Transition name="from-top">
-        <ExpandSection v-if="error" class="bg-red-500 rounded text-gray-50" closable>
-          <template #title>
-            <span class="text-lg">Oops... Some error just occurred!</span>
-          </template>
-          <template #body>
-            <pre class="text-sm">{{ error }}</pre>
-          </template>
-        </ExpandSection>
-      </Transition>
-      <Transition name="from-top">
-        <ExpandSection v-if="success" class="bg-green-600 rounded text-gray-50" closable>
-          <template #title>
-            <span class="text-lg">Message successful sent!</span>
-          </template>
-          <template #body>
-            <span>{{ success }}</span>
-          </template>
-        </ExpandSection>
-      </Transition>
-      <label for="name" class="text-gray-50 flex-col flex items-start">
-        <span>Enter your name</span>
-        <span class="flex w-full">
-          <input
-            v-model.trim="msgTitle"
-            :disabled="isLoading"
-            placeholder="Donald Trump"
-            type="text"
-            name="name"
-            id="name"
-            required
-            maxlength="255"
-            minlength="3"
-            class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
-          />
-          <input
-            class="w-fit max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
-            :class="msgTitleLength > 255 || msgTitleLength < 3 ? 'bg-red-500' : 'bg-green-600'"
-            disabled
-            :value="`${msgTitleLength}/255`"
-            type="text"
-            name="name-counter"
-            id="name-counter"
-          />
-        </span>
-      </label>
-      <label for="name" class="text-gray-50 flex-col flex items-start">
+  <form
+    method="post"
+    class="bg-gray-800 rounded-2xl w-full max-w-3xl flex flex-col p-4 gap-2"
+    @submit="onSubmit"
+  >
+    <Transition name="from-top">
+      <ExpandSection v-if="error" class="bg-red-500 rounded text-gray-50" closable>
+        <template #title>
+          <span class="text-lg">Oops... Some error just occurred!</span>
+        </template>
+        <template #body>
+          <pre class="text-sm">{{ error }}</pre>
+        </template>
+      </ExpandSection>
+    </Transition>
+    <Transition name="from-top">
+      <ExpandSection v-if="success" class="bg-green-600 rounded text-gray-50" closable>
+        <template #title>
+          <span class="text-lg">Message successful sent!</span>
+        </template>
+        <template #body>
+          <span>{{ success }}</span>
+        </template>
+      </ExpandSection>
+    </Transition>
+    <label for="name" class="text-gray-50 flex-col flex items-start border-b pb-2 border-gray-500">
+      <span>Enter your name</span>
+      <span class="flex w-full">
+        <input
+          v-model.trim="msgTitle"
+          :disabled="isLoading"
+          placeholder="Donald Trump"
+          type="text"
+          name="name"
+          id="name"
+          required
+          maxlength="255"
+          minlength="3"
+          class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
+        />
+        <input
+          class="w-fit text-sm max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
+          :class="validTitleLength ? 'bg-green-600' : 'bg-red-500'"
+          disabled
+          :value="`${msgTitleLength}/255`"
+          type="text"
+          name="name-counter"
+          id="name-counter"
+        />
+      </span>
+    </label>
+    <Transition name="from-top">
+      <label
+        v-if="msgTitleLength < 256 && msgTitleLength > 2"
+        for="name"
+        class="text-gray-50 flex-col flex items-start border-b pb-2 border-gray-500"
+      >
         <span>Enter your contact</span>
         <span class="flex w-full">
           <input
@@ -177,8 +166,8 @@ watch(msgContact, (value) => {
             class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
           />
           <input
-            class="w-fit max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
-            :class="msgContactLength > 255 || msgContactLength < 5 ? 'bg-red-500' : 'bg-green-600'"
+            class="w-fit text-sm max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
+            :class="validContactLength ? 'bg-green-600' : 'bg-red-500'"
             disabled
             :value="`${msgContactLength}/255`"
             type="text"
@@ -187,30 +176,38 @@ watch(msgContact, (value) => {
           />
         </span>
       </label>
-      <label for="msg-body" class="text-gray-50 flex-col flex items-start">
-        <span>Message text (read only)</span>
-        <textarea
-          name="msg-body"
-          id="msg-body"
-          rows="6"
-          disabled
-          placeholder="Dear Alexey, ..."
-          class="w-full h-full rounded text-gray-950 px-3 py-2 disabled:bg-gray-200 cursor-not-allowed"
-          :value="msgContent"
-        ></textarea>
-      </label>
-      <button
-        :disabled="isLoading"
-        class="flex items-center px-2 py-1 disabled:bg-gray-500 disabled:cursor-not-allowed transition duration-500 bg-blue-600 text-red-50 rounded w-52 h-8 mx-auto relative"
-      >
-        <span class="flex-grow">Send</span>
-        <span class="w-6 h-6">
-          <LoaderIcon v-if="isLoading" class="animate-spin" />
-          <SendIcon v-else />
-        </span>
-      </button>
-    </form>
-  </div>
+    </Transition>
+
+    <Transition name="from-top">
+      <div v-if="validContactLength && validTitleLength" class="border-b pb-2 border-gray-500">
+        <h3 class="text-gray-50">Choose one or more</h3>
+        <MessageMasteredList class="text-gray-50" />
+      </div>
+    </Transition>
+
+    <label for="msg-body" class="text-gray-50 flex-col flex items-start">
+      <span>Message text (read only)</span>
+      <textarea
+        name="msg-body"
+        id="msg-body"
+        rows="6"
+        disabled
+        placeholder="Dear Alexey, ..."
+        class="w-full h-full rounded text-gray-950 px-3 py-2 disabled:bg-gray-200 cursor-not-allowed"
+        :value="msgContent"
+      ></textarea>
+    </label>
+    <button
+      :disabled="isLoading || !checkCheckedList"
+      class="flex items-center px-2 py-1 disabled:bg-gray-500 disabled:cursor-not-allowed transition duration-500 bg-blue-600 text-red-50 rounded w-52 h-8 mx-auto relative"
+    >
+      <span class="flex-grow">Send</span>
+      <span class="w-6 h-6">
+        <LoaderIcon v-if="isLoading" class="animate-spin" />
+        <SendIcon v-else />
+      </span>
+    </button>
+  </form>
 </template>
 
 <style scoped></style>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MessageForm from '@/components/PageContact/MessageForm.vue'
-import MessageMasteredList from '@/components/PageContact/MessageMasteredList.vue'
 import { provide, ref } from 'vue'
 import { masteredData } from '@/data/mastered'
 
@@ -12,9 +11,8 @@ provide('checkedList', checkedList.value)
 <template>
   <div class="w-full p-4">
     <h2 class="text-3xl font-bold text-center pb-4">Contact Me</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2">
+    <div class="flex justify-center w-full">
       <MessageForm />
-      <MessageMasteredList />
     </div>
   </div>
 </template>
