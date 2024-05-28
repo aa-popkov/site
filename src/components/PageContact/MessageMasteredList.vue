@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import CheckboxTreeList from '@/components/Shared/CheckboxTreeList.vue'
 import { inject, provide } from 'vue'
 import type { TTreeChecked } from '@/models/treeChecked'
@@ -22,7 +21,7 @@ const findParent = (el: TTreeChecked, parents: TTreeChecked[] = data): TTreeChec
 const updateParent = (node: TTreeChecked) => {
   const parent = findParent(node)
   if (parent) {
-    const allChildChecked = parent?.children?.every(v => v.checked === true)
+    const allChildChecked = parent?.children?.every((v) => v.checked === true)
     parent.checked = !!allChildChecked
     updateParent(parent)
   }
@@ -41,7 +40,6 @@ const toggleChecked = (el: TTreeChecked) => {
 }
 
 provide('toggle', toggleChecked)
-
 </script>
 
 <template>
@@ -50,6 +48,4 @@ provide('toggle', toggleChecked)
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -19,15 +19,17 @@ const closeMessage = () => {
 const toggleDetails = () => {
   isShowSectionDetails.value = !isShowSectionDetails.value
 }
-
 </script>
 
 <template>
   <div v-if="isShowSection" class="flex flex-col relative py-1 px-2">
     <div class="flex items-start justify-start gap-2 py-1">
       <div class="flex-grow flex gap-x-2">
-        <ChevronUpIcon @click="toggleDetails" class="w-4 h-4 transition cursor-pointer"
-                       :class="isShowSectionDetails ? '' : 'rotate-180'" />
+        <ChevronUpIcon
+          @click="toggleDetails"
+          class="w-4 h-4 transition cursor-pointer"
+          :class="isShowSectionDetails ? '' : 'rotate-180'"
+        />
         <slot name="title" />
       </div>
       <CancelIcon v-if="closable" @click="closeMessage" class="w-6 h-6 cursor-pointer" />
@@ -38,6 +40,4 @@ const toggleDetails = () => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

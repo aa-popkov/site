@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { ref } from 'vue'
 
 interface IProps {
@@ -17,16 +16,20 @@ const imgLoaded = (e: Event) => {
   imgIsLoad.value = true
   target.classList.toggle('hidden')
 }
-
 </script>
 
 <template>
   <div>
-    <img v-if="!imgIsLoad" :src="minImgUrl" class="blur-2xl" :alt="imgAlt" :width="imgWidth" height="auto">
-    <img :src="origImgUrl" @load="imgLoaded" :width="imgWidth" :alt="imgAlt" class="hidden">
+    <img
+      v-if="!imgIsLoad"
+      :src="minImgUrl"
+      class="blur-2xl"
+      :alt="imgAlt"
+      :width="imgWidth"
+      height="auto"
+    />
+    <img :src="origImgUrl" @load="imgLoaded" :width="imgWidth" :alt="imgAlt" class="hidden" />
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

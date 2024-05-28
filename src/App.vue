@@ -5,16 +5,12 @@ import PageFooter from '@/components/PageFooter.vue'
 
 <template>
   <div id="root" class="2xl:container mx-auto w-full">
-
     <PageHeader />
     <div class="pb-32 md:pb-24">
       <RouterView />
     </div>
     <PageFooter />
-
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

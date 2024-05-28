@@ -22,7 +22,7 @@ const mediaIconList: IMediaIcon[] = [
     iconUrl: './icon/inst_icon.svg',
     alt: 'inst-icon',
     linkUrl: 'https://www.instagram.com/alexey_it'
-  },
+  }
 ]
 </script>
 
@@ -40,6 +40,4 @@ const mediaIconList: IMediaIcon[] = [
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

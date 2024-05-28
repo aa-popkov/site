@@ -7,19 +7,16 @@ import { masteredData } from '@/data/mastered'
 const checkedList = ref(masteredData)
 
 provide('checkedList', checkedList.value)
-
 </script>
 
 <template>
   <div class="w-full p-4">
     <h2 class="text-3xl font-bold text-center pb-4">Contact Me</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2">
-      <MessageForm  />
-      <MessageMasteredList/>
+      <MessageForm />
+      <MessageMasteredList />
     </div>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

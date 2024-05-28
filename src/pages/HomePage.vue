@@ -24,6 +24,4 @@ import ImgPreloader from '@/components/Shared/ImgPreloader.vue'
   </main>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

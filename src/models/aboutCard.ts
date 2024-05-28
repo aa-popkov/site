@@ -1,4 +1,4 @@
 export interface IAboutCard {
-  title: string,
+  title: string
   description: string
 }

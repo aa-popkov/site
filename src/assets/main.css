@@ -2,47 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .v-enter-active,
 .v-leave-active {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 
 .drop-enter-active,
 .drop-leave-active {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .drop-enter-from,
 .drop-leave-to {
-    opacity: 0;
-    transform: translate(5px, -15px);
+  opacity: 0;
+  transform: translate(5px, -15px);
 }
 
 .list-enter-active,
 .list-leave-active {
-    transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
-    opacity: 0;
-    transform: translateX(30px);
+  opacity: 0;
+  transform: translateX(30px);
 }
-
 
 .from-top-enter-active,
 .from-top-leave-active {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .from-top-enter-from,
 .from-top-leave-to {
-    opacity: 0;
-    transform: translateY(-5px);
+  opacity: 0;
+  transform: translateY(-5px);
 }

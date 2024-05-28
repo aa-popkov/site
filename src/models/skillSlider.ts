@@ -1,4 +1,4 @@
 export interface ISkillSlider {
-  title: string,
+  title: string
   percent: number
 }

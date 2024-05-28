@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
 
-const routes:  RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: HomePage
   },
   {
     path: '/pricing',
-    component: () => import('@/pages/PricingPage.vue'),
+    component: () => import('@/pages/PricingPage.vue')
   },
   {
     path: '/contact',

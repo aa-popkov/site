@@ -1,13 +1,7 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-<div>
-  This page made be available later!
-</div>
+  <div>This page made be available later!</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

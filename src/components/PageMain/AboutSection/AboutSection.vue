@@ -1,8 +1,6 @@
 <script setup lang="ts">
-
 import AboutInfoCardList from '@/components/PageMain/AboutSection/AboutInfoCardList.vue'
 import ImgPreloader from '@/components/Shared/ImgPreloader.vue'
-
 </script>
 
 <template>
@@ -25,6 +23,4 @@ import ImgPreloader from '@/components/Shared/ImgPreloader.vue'
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,5 +1,5 @@
 export interface IMediaIcon {
-  iconUrl: string,
-  alt: string,
+  iconUrl: string
+  alt: string
   linkUrl: string
 }

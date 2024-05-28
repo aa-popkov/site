@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { inject, ref, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { isAxiosError } from 'axios'
@@ -10,7 +9,7 @@ import LoaderIcon from '@/components/Icons/LoaderIcon.vue'
 import ExpandSection from '@/components/Shared/ExpandSection.vue'
 import type { TTreeChecked } from '@/models/treeChecked'
 
-const baseMsgContent = 'Hi Alexey 👋\n' + 'I\'m need your expertise, for next:\n'
+const baseMsgContent = 'Hi Alexey 👋\n' + "I'm need your expertise, for next:\n"
 
 const secureText = ref(baseMsgContent)
 const msgTitle = ref('')
@@ -41,13 +40,17 @@ const onSubmit = async (e: Event) => {
     if (msgContent.value !== secureText.value) {
       throw new Error('U try cracked, but u lose 👾')
     }
-    const apiResponse = await sendMessage({
-      title: msgTitle.value,
-      content: secureText.value,
-      contact: msgContact.value
-    }, getToken())
+    const apiResponse = await sendMessage(
+      {
+        title: msgTitle.value,
+        content: secureText.value,
+        contact: msgContact.value
+      },
+      getToken()
+    )
     if (apiResponse.status === 200) {
-      success.value = 'The message has been sent successfully. Remember that sending more than one message per hour is not recommended. I will definitely contact you at the specified contacts as soon as possible.'
+      success.value =
+        'The message has been sent successfully. Remember that sending more than one message per hour is not recommended. I will definitely contact you at the specified contacts as soon as possible.'
       return
     } else {
       throw new Error(`Request is failed: ${apiResponse.data}`)
@@ -79,7 +82,10 @@ const generateCheckedTreeString = (tree: TTreeChecked[], depth: number = 0): str
   let result = ''
 
   for (const node of tree) {
-    if (node.checked || (node.children && node.children.some(child => isCheckedRecursive(child)))) {
+    if (
+      node.checked ||
+      (node.children && node.children.some((child) => isCheckedRecursive(child)))
+    ) {
       const spaceSymbol = depth > 0 ? ' ⎿ ' : '• '
       result += '  '.repeat(depth) + spaceSymbol + node.title + '\n'
       if (node.children) {
@@ -104,7 +110,6 @@ watch(msgTitle, (value) => {
 watch(msgContact, (value) => {
   msgContactLength.value = value.length ?? 0
 })
-
 </script>
 
 <template>
@@ -137,10 +142,14 @@ watch(msgContact, (value) => {
             v-model.trim="msgTitle"
             :disabled="isLoading"
             placeholder="Donald Trump"
-            type="text" name="name" id="name" required
+            type="text"
+            name="name"
+            id="name"
+            required
             maxlength="255"
             minlength="3"
-            class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950">
+            class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
+          />
           <input
             class="w-fit max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
             :class="msgTitleLength > 255 || msgTitleLength < 3 ? 'bg-red-500' : 'bg-green-600'"
@@ -148,7 +157,8 @@ watch(msgContact, (value) => {
             :value="`${msgTitleLength}/255`"
             type="text"
             name="name-counter"
-            id="name-counter">
+            id="name-counter"
+          />
         </span>
       </label>
       <label for="name" class="text-gray-50 flex-col flex items-start">
@@ -158,10 +168,14 @@ watch(msgContact, (value) => {
             v-model.trim="msgContact"
             :disabled="isLoading"
             placeholder="mobile, tg, wa, mail, etc."
-            type="text" name="contact" id="contact" required
+            type="text"
+            name="contact"
+            id="contact"
+            required
             maxlength="255"
             minlength="5"
-            class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950">
+            class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
+          />
           <input
             class="w-fit max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
             :class="msgContactLength > 255 || msgContactLength < 5 ? 'bg-red-500' : 'bg-green-600'"
@@ -169,13 +183,15 @@ watch(msgContact, (value) => {
             :value="`${msgContactLength}/255`"
             type="text"
             name="name-counter"
-            id="name-counter">
+            id="name-counter"
+          />
         </span>
       </label>
       <label for="msg-body" class="text-gray-50 flex-col flex items-start">
         <span>Message text (read only)</span>
         <textarea
-          name="msg-body" id="msg-body"
+          name="msg-body"
+          id="msg-body"
           rows="6"
           disabled
           placeholder="Dear Alexey, ..."
@@ -185,7 +201,8 @@ watch(msgContact, (value) => {
       </label>
       <button
         :disabled="isLoading"
-        class="flex items-center px-2 py-1 disabled:bg-gray-500 disabled:cursor-not-allowed transition duration-500 bg-blue-600 text-red-50 rounded w-52 h-8 mx-auto relative">
+        class="flex items-center px-2 py-1 disabled:bg-gray-500 disabled:cursor-not-allowed transition duration-500 bg-blue-600 text-red-50 rounded w-52 h-8 mx-auto relative"
+      >
         <span class="flex-grow">Send</span>
         <span class="w-6 h-6">
           <LoaderIcon v-if="isLoading" class="animate-spin" />
@@ -196,6 +213,4 @@ watch(msgContact, (value) => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
