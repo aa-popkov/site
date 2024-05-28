@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Bars3Icon, ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
+import ChevronUpIcon from '@/components/Icons/ChevronUpIcon.vue'
+import MenuIcon from '@/components/Icons/MenuIcon.vue'
 
 const showDrop = ref(false)
 const toggleDrop = () => {
@@ -28,7 +29,7 @@ const toggleDrop = () => {
       </RouterLink>
     </div>
     <div class="relative hidden sm:block">
-      <Bars3Icon class="size-8 text-gray-50" @click="toggleDrop" />
+      <MenuIcon class="size-8 stroke-gray-50 cursor-pointer" @click="toggleDrop" />
       <button
         v-if="showDrop"
         @click="toggleDrop"
@@ -49,9 +50,9 @@ const toggleDrop = () => {
       </Transition>
     </div>
     <div class="relative block sm:hidden [overflow:overlay]">
-      <ChevronDownIcon
-        class="size-8 text-gray-50 transition"
-        :class="showDrop ? 'rotate-180' : ''"
+      <ChevronUpIcon
+        class="size-8 fill-gray-50 transition rotate-180"
+        :class="!showDrop ? 'rotate-180' : ''"
         @click="toggleDrop"
       />
       <button

@@ -35,9 +35,14 @@ onUnmounted(() => {
 <template>
   <div class="flex gap-2 p-4 flex-wrap" ref="iconContainer">
     <TooltipElement v-for="icon in masteredData" :key="icon.title" :title="icon.title">
-      <Transition name="list" :duration="700">
-        <MasteredIcon v-if="iconIsShow" :title="icon.title" :icon="icon.icon" />
-      </Transition>
+      <template #default>
+        <Transition name="list" :duration="700">
+          <MasteredIcon v-if="iconIsShow" :title="icon.title" :icon="icon.icon" />
+        </Transition>
+      </template>
+      <template #content>
+        <span class="text-xs sm:text-md">{{ icon.title }}</span>
+      </template>
     </TooltipElement>
   </div>
 </template>

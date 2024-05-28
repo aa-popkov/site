@@ -32,7 +32,7 @@ const toggleDetails = () => {
         />
         <slot name="title" />
       </div>
-      <CancelIcon v-if="closable" @click="closeMessage" class="w-6 h-6 cursor-pointer" />
+      <CancelIcon v-if="closable" @click="closeMessage" class="w-4 h-4 cursor-pointer" />
     </div>
     <Transition name="from-top">
       <slot v-if="isShowSectionDetails" name="body" />

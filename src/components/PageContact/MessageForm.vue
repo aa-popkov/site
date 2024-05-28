@@ -10,6 +10,8 @@ import ExpandSection from '@/components/Shared/ExpandSection.vue'
 import type { TTreeChecked } from '@/models/treeChecked'
 import MessageMasteredList from '@/components/PageContact/MessageMasteredList.vue'
 import { generateCheckedTreeString, isCheckedRecursive } from '@/utils/checkBoxTree'
+import QuestionIcon from '@/components/Icons/QuestionIcon.vue'
+import TooltipElement from '@/components/Shared/TooltipElement.vue'
 
 const baseMsgContent = 'Hi Alexey 👋\n' + "I'm need your expertise, for next:\n"
 
@@ -26,12 +28,15 @@ const validContactLength = computed(
 const secureText = ref(baseMsgContent)
 const msgContent = ref(secureText.value)
 
+const checkedList = inject('checkedList') as TTreeChecked[]
+const checkCheckedList = computed(() => checkedList.some((v) => isCheckedRecursive(v)))
+
 const isLoading = ref(false)
 const error = ref('')
 const success = ref('')
-
-const checkedList = inject('checkedList') as TTreeChecked[]
-const checkCheckedList = computed(() => checkedList.some((v) => isCheckedRecursive(v)))
+const checkForm = computed(
+  () => validContactLength.value && validTitleLength.value && checkCheckedList.value
+)
 
 const getToken = (): string => {
   let token = localStorage.getItem(config.LOCALSTORAGE_KEYS.clientId)
@@ -73,6 +78,7 @@ const onSubmit = async (e: Event) => {
       error.value = (e as Error).message
     }
     console.error(e)
+    scroll({ top: 0 })
   } finally {
     isLoading.value = false
   }
@@ -191,22 +197,36 @@ watch(msgContact, (value) => {
         name="msg-body"
         id="msg-body"
         rows="6"
-        disabled
+        readonly
         placeholder="Dear Alexey, ..."
         class="w-full h-full rounded text-gray-950 px-3 py-2 disabled:bg-gray-200 cursor-not-allowed"
         :value="msgContent"
       ></textarea>
     </label>
-    <button
-      :disabled="isLoading || !checkCheckedList"
-      class="flex items-center px-2 py-1 disabled:bg-gray-500 disabled:cursor-not-allowed transition duration-500 bg-blue-600 text-red-50 rounded w-52 h-8 mx-auto relative"
-    >
-      <span class="flex-grow">Send</span>
-      <span class="w-6 h-6">
-        <LoaderIcon v-if="isLoading" class="animate-spin" />
-        <SendIcon v-else />
-      </span>
-    </button>
+    <div class="flex items-center justify-center">
+      <Transition>
+        <div v-if="!checkForm">
+          <TooltipElement>
+            <template #default>
+              <QuestionIcon class="w-6 h-6 fill-gray-500 stroke-gray-500 stroke-0" />
+            </template>
+            <template #content>
+              <span>It is necessary to fill out the form in full sadasd as dasda</span>
+            </template>
+          </TooltipElement>
+        </div>
+      </Transition>
+      <button
+        :disabled="isLoading || !checkForm"
+        class="flex items-center px-2 py-1 disabled:bg-gray-500 disabled:cursor-not-allowed transition duration-500 bg-blue-600 text-red-50 rounded w-52 h-8 relative"
+      >
+        <span class="flex-grow">Send</span>
+        <span class="w-6 h-6">
+          <LoaderIcon v-if="isLoading" class="animate-spin" />
+          <SendIcon class="w-6 h-6 fill-gray-50 stroke-gray-700" v-else />
+        </span>
+      </button>
+    </div>
   </form>
 </template>
 
