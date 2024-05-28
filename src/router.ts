@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
-import PricingPage from '@/pages/PricingPage.vue'
-import ContactPage from '@/pages/ContactPage.vue'
 
 const routes:  RouteRecordRaw[] = [
   {
@@ -10,11 +8,11 @@ const routes:  RouteRecordRaw[] = [
   },
   {
     path: '/pricing',
-    component: PricingPage,
+    component: () => import('@/pages/PricingPage.vue'),
   },
   {
     path: '/contact',
-    component: ContactPage
+    component: () => import('@/pages/ContactPage.vue')
   }
 ]
 

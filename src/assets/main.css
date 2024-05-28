@@ -34,3 +34,15 @@
     opacity: 0;
     transform: translateX(30px);
 }
+
+
+.from-top-enter-active,
+.from-top-leave-active {
+    transition: all 0.3s ease;
+}
+
+.from-top-enter-from,
+.from-top-leave-to {
+    opacity: 0;
+    transform: translateY(-5px);
+}
