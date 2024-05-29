@@ -121,7 +121,7 @@ watch(msgContact, (value) => {
           <span class="text-lg">Oops... Some error just occurred!</span>
         </template>
         <template #body>
-          <pre class="text-sm">{{ error }}</pre>
+          <pre class="text-sm text-wrap">{{ error }}</pre>
         </template>
       </ExpandSection>
     </Transition>
