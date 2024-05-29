@@ -28,12 +28,12 @@ const toggleDetails = () => {
       <div class="flex-grow flex gap-x-2">
         <ChevronUpIcon
           @click="toggleDetails"
-          class="w-4 h-4 transition cursor-pointer"
+          class="w-4 h-4 transition cursor-pointer fill-gray-500 stroke-gray-700"
           :class="isShowSectionDetails ? '' : 'rotate-180'"
         />
         <slot name="title" />
       </div>
-      <CancelIcon v-if="closable" @click="closeMessage" class="w-4 h-4 cursor-pointer" />
+      <CancelIcon v-if="closable" @click="closeMessage" class="w-4 h-4 cursor-pointer fill-gray-500 stroke-gray-700" />
     </div>
     <Transition name="from-top">
       <slot v-if="isShowSectionDetails" name="body" />

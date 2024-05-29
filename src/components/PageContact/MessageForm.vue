@@ -121,7 +121,9 @@ watch(msgContact, (value) => {
           <span class="text-lg">Oops... Some error just occurred!</span>
         </template>
         <template #body>
-          <pre class="text-sm text-wrap">{{ error }}</pre>
+          <div class="text-sm text-wrap overflow-x-auto">
+            <pre>{{ error }}</pre>
+          </div>
         </template>
       </ExpandSection>
     </Transition>
@@ -148,12 +150,12 @@ watch(msgContact, (value) => {
           required
           maxlength="255"
           minlength="3"
-          class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
+          class="appearance-none placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
         />
         <input
-          class="w-fit text-sm max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
+          class="appearance-none w-fit text-sm max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
           :class="validTitleLength ? 'bg-green-600' : 'bg-red-500'"
-          disabled
+          readonly
           :value="`${msgTitleLength}/255`"
           type="text"
           name="name-counter"
@@ -179,12 +181,12 @@ watch(msgContact, (value) => {
             required
             maxlength="255"
             minlength="5"
-            class="placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
+            class="appearance-none placeholder:italic py-2 px-3 rounded-l w-full text-gray-950"
           />
           <input
-            class="w-fit text-sm max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
+            class="appearance-none w-fit text-sm max-w-20 min-w-10 cursor-default rounded-r border-l px-1 text-center transition duration-700"
             :class="validContactLength ? 'bg-green-600' : 'bg-red-500'"
-            disabled
+            readonly
             :value="`${msgContactLength}/255`"
             type="text"
             name="name-counter"
