@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CancelIcon from '@/components/Icons/CancelIcon.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import ChevronUpIcon from '@/components/Icons/ChevronUpIcon.vue'
 
 interface IProps {
@@ -11,9 +11,10 @@ defineProps<IProps>()
 
 const isShowSection = ref(true)
 const isShowSectionDetails = ref(false)
+const emit = defineEmits(['clear'])
 
 const closeMessage = () => {
-  isShowSection.value = false
+  emit('clear')
 }
 
 const toggleDetails = () => {

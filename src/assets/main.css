@@ -44,3 +44,14 @@
   opacity: 0;
   transform: translateY(-5px);
 }
+
+.from-top-slow-enter-active,
+.from-top-slow-leave-active {
+  transition: all 0.7s ease-in-out;
+}
+
+.from-top-slow-enter-from,
+.from-top-slow-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+}

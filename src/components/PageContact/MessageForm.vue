@@ -22,7 +22,7 @@ const validTitleLength = computed(() => msgTitleLength.value > 2 && msgTitleLeng
 const msgContact = ref('')
 const msgContactLength = ref(0)
 const validContactLength = computed(
-  () => msgContactLength.value > 2 && msgContactLength.value < 256
+  () => msgContactLength.value > 4 && msgContactLength.value < 256
 )
 
 const secureText = ref(baseMsgContent)
@@ -37,6 +37,10 @@ const success = ref('')
 const checkForm = computed(
   () => validContactLength.value && validTitleLength.value && checkCheckedList.value
 )
+const clearMessages = () => {
+  error.value = ''
+  success.value = ''
+}
 
 const getToken = (): string => {
   let token = localStorage.getItem(config.LOCALSTORAGE_KEYS.clientId)
@@ -49,12 +53,17 @@ const getToken = (): string => {
 
 const onSubmit = async (e: Event) => {
   e.preventDefault()
-  error.value = ''
+  clearMessages()
   isLoading.value = true
   try {
     if (msgContent.value !== secureText.value) {
       throw new Error('U try cracked, but u lose 👾')
     }
+
+    if(!checkCheckedList.value) {
+      throw new Error('Choose one or more expertise in list!')
+    }
+
     const apiResponse = await sendMessage(
       {
         title: msgTitle.value,
@@ -63,6 +72,7 @@ const onSubmit = async (e: Event) => {
       },
       getToken()
     )
+    console.log(apiResponse)
     if (apiResponse.status === 200) {
       success.value =
         'The message has been sent successfully. Remember that sending more than one message per hour is not recommended. I will definitely contact you at the specified contacts as soon as possible.'
@@ -106,7 +116,7 @@ watch(msgContact, (value) => {
     @submit="onSubmit"
   >
     <Transition name="from-top">
-      <ExpandSection v-if="error" class="bg-red-500 rounded text-gray-50" closable>
+      <ExpandSection v-if="error" class="bg-red-500 rounded text-gray-50" closable @clear="clearMessages">
         <template #title>
           <span class="text-lg">Oops... Some error just occurred!</span>
         </template>
@@ -116,7 +126,7 @@ watch(msgContact, (value) => {
       </ExpandSection>
     </Transition>
     <Transition name="from-top">
-      <ExpandSection v-if="success" class="bg-green-600 rounded text-gray-50" closable>
+      <ExpandSection v-if="success" class="bg-green-600 rounded text-gray-50">
         <template #title>
           <span class="text-lg">Message successful sent!</span>
         </template>
@@ -151,7 +161,7 @@ watch(msgContact, (value) => {
         />
       </span>
     </label>
-    <Transition name="from-top">
+    <Transition name="from-top-slow">
       <label
         v-if="msgTitleLength < 256 && msgTitleLength > 2"
         for="name"
@@ -184,7 +194,7 @@ watch(msgContact, (value) => {
       </label>
     </Transition>
 
-    <Transition name="from-top">
+    <Transition name="from-top-slow">
       <div v-if="validContactLength && validTitleLength" class="border-b pb-2 border-gray-500">
         <h3 class="text-gray-50">Choose one or more</h3>
         <MessageMasteredList class="text-gray-50" />
@@ -211,7 +221,7 @@ watch(msgContact, (value) => {
               <QuestionIcon class="w-6 h-6 fill-gray-500 stroke-gray-500 stroke-0" />
             </template>
             <template #content>
-              <span>It is necessary to fill out the form in full sadasd as dasda</span>
+              <span>It is necessary to fill out the form in full</span>
             </template>
           </TooltipElement>
         </div>
