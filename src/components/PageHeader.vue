@@ -2,18 +2,15 @@
 import { ref } from 'vue'
 import ChevronUpIcon from '@/components/Icons/ChevronUpIcon.vue'
 import MenuIcon from '@/components/Icons/MenuIcon.vue'
+import router from '@/router'
 
 const showDrop = ref(false)
 const toggleDrop = () => {
   showDrop.value = !showDrop.value
-  const body = document.querySelector('body')
-  const bodyScrollWidth = window.innerWidth - document.documentElement.clientWidth
-  if (!showDrop.value && body) {
-    body.className = ''
-    return
-  }
-  body?.classList.toggle('overflow-hidden')
-  body?.classList.toggle(`mr-[${bodyScrollWidth}px]`)
+}
+
+const goToManage = () => {
+  router.push('/manage/messages')
 }
 </script>
 
@@ -28,12 +25,15 @@ const toggleDrop = () => {
         Alexey Popkov
       </RouterLink>
     </div>
+    <div class="h-full w-1/6" @click="goToManage">
+      <span>&nbsp;</span>
+    </div>
     <div class="relative hidden sm:block">
       <MenuIcon class="size-8 stroke-gray-50 cursor-pointer" @click="toggleDrop" />
       <button
         v-if="showDrop"
         @click="toggleDrop"
-        class="fixed bg-black opacity-30 w-full inset-0 h-full cursor-default"
+        class="fixed bg-black opacity-0 w-full inset-0 h-full cursor-default"
       ></button>
       <Transition name="drop">
         <div
@@ -51,7 +51,7 @@ const toggleDrop = () => {
     </div>
     <div class="relative block sm:hidden [overflow:overlay]">
       <ChevronUpIcon
-        class="size-8 fill-gray-50 transition rotate-180"
+        class="size-6 fill-gray-50 transition rotate-180"
         :class="!showDrop ? 'rotate-180' : ''"
         @click="toggleDrop"
       />
@@ -77,4 +77,6 @@ const toggleDrop = () => {
   </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
