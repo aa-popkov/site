@@ -6,14 +6,15 @@ import SendIcon from '@/components/Icons/SendIcon.vue'
 import { sendMessage } from '@/utils/api'
 import { config } from '@/utils/config'
 import LoaderIcon from '@/components/Icons/LoaderIcon.vue'
-import ExpandSection from '@/components/Shared/ExpandSection.vue'
 import type { TTreeChecked } from '@/models/treeChecked'
 import MessageMasteredList from '@/components/PageContact/MessageMasteredList.vue'
 import { generateCheckedTreeString, isCheckedRecursive } from '@/utils/checkBoxTree'
 import QuestionIcon from '@/components/Icons/QuestionIcon.vue'
 import TooltipElement from '@/components/Shared/TooltipElement.vue'
+import { useNotifyStore } from '@/utils/store'
 
 const baseMsgContent = 'Hi Alexey 👋\n' + "I'm need your expertise, for next:\n"
+const { addMessage } = useNotifyStore()
 
 const msgTitle = ref('')
 const msgTitleLength = ref(0)
@@ -32,15 +33,9 @@ const checkedList = inject('checkedList') as TTreeChecked[]
 const checkCheckedList = computed(() => checkedList.some((v) => isCheckedRecursive(v)))
 
 const isLoading = ref(false)
-const error = ref('')
-const success = ref('')
 const checkForm = computed(
   () => validContactLength.value && validTitleLength.value && checkCheckedList.value
 )
-const clearMessages = () => {
-  error.value = ''
-  success.value = ''
-}
 
 const getToken = (): string => {
   let token = localStorage.getItem(config.LOCALSTORAGE_KEYS.clientId)
@@ -53,14 +48,13 @@ const getToken = (): string => {
 
 const onSubmit = async (e: Event) => {
   e.preventDefault()
-  clearMessages()
   isLoading.value = true
   try {
     if (msgContent.value !== secureText.value) {
       throw new Error('U try cracked, but u lose 👾')
     }
 
-    if(!checkCheckedList.value) {
+    if (!checkCheckedList.value) {
       throw new Error('Choose one or more expertise in list!')
     }
 
@@ -74,21 +68,29 @@ const onSubmit = async (e: Event) => {
     )
     console.log(apiResponse)
     if (apiResponse.status === 200) {
-      success.value =
-        'The message has been sent successfully. Remember that sending more than one message per hour is not recommended. I will definitely contact you at the specified contacts as soon as possible.'
+      addMessage({
+        msg: 'The message has been sent successfully. Remember that sending more than one message per hour is not recommended. I will definitely contact you at the specified contacts as soon as possible.',
+        color: 'success'
+      })
       return
     } else {
       throw new Error(`Request is failed: ${apiResponse.data}`)
     }
   } catch (e) {
     if (isAxiosError(e)) {
-      const respData = e.response?.data
-      error.value = JSON.stringify(respData ? respData : e.message, null, 2)
+      let respData = e.response?.data
+      respData = JSON.stringify(respData ? respData : e.message, null, 2)
+      addMessage({
+        msg: respData,
+        color: 'error'
+      })
     } else {
-      error.value = (e as Error).message
+      addMessage({
+        msg: (e as Error).message,
+        color: 'error'
+      })
     }
     console.error(e)
-    scroll({ top: 0 })
   } finally {
     isLoading.value = false
   }
@@ -115,28 +117,6 @@ watch(msgContact, (value) => {
     class="bg-gray-800 rounded-2xl w-full max-w-3xl flex flex-col p-4 gap-2"
     @submit="onSubmit"
   >
-    <Transition name="from-top">
-      <ExpandSection v-if="error" class="bg-red-500 rounded text-gray-50" closable @clear="clearMessages">
-        <template #title>
-          <span class="text-lg">Oops... Some error just occurred!</span>
-        </template>
-        <template #body>
-          <div class="text-sm text-wrap overflow-x-auto">
-            <pre>{{ error }}</pre>
-          </div>
-        </template>
-      </ExpandSection>
-    </Transition>
-    <Transition name="from-top">
-      <ExpandSection v-if="success" class="bg-green-600 rounded text-gray-50">
-        <template #title>
-          <span class="text-lg">Message successful sent!</span>
-        </template>
-        <template #body>
-          <span>{{ success }}</span>
-        </template>
-      </ExpandSection>
-    </Transition>
     <label for="name" class="text-gray-50 flex-col flex items-start border-b pb-2 border-gray-500">
       <span>Enter your name</span>
       <span class="flex w-full">

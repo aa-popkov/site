@@ -17,17 +17,14 @@ export const login = async (data: object) => {
 }
 
 export const getUsers = async () => {
-  const {token} = useUserStore()
-  return await axios.get<IUser[]>(
-    `${config.BACKEND_API}/api/v1/user/get_all`,
-    {
-      params: {
-        page_number: 0,
-        page_size: 10
-      },
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+  const { token } = useUserStore()
+  return await axios.get<IUser[]>(`${config.BACKEND_API}/api/v1/user/get_all`, {
+    params: {
+      page_number: 0,
+      page_size: 10
+    },
+    headers: {
+      Authorization: `Bearer ${token}`
     }
-    )
+  })
 }

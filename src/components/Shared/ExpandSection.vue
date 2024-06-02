@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CancelIcon from '@/components/Icons/CancelIcon.vue'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import ChevronUpIcon from '@/components/Icons/ChevronUpIcon.vue'
 
 interface IProps {
@@ -33,7 +33,11 @@ const toggleDetails = () => {
         />
         <slot name="title" />
       </div>
-      <CancelIcon v-if="closable" @click="closeMessage" class="w-4 h-4 cursor-pointer fill-gray-500 stroke-gray-700" />
+      <CancelIcon
+        v-if="closable"
+        @click="closeMessage"
+        class="w-4 h-4 cursor-pointer fill-gray-500 stroke-gray-700"
+      />
     </div>
     <Transition name="from-top">
       <slot v-if="isShowSectionDetails" name="body" />

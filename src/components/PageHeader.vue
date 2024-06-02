@@ -77,6 +77,4 @@ const goToManage = () => {
   </header>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
