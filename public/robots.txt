@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /manage/
+Disallow: /pricing/
+Allow: /
+Sitemap: https://aapopkov.su/sitemap.xml
