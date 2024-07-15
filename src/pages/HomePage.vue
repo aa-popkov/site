@@ -11,8 +11,8 @@ import ImgPreloader from '@/components/Shared/ImgPreloader.vue'
     <div class="flex items-center flex-col">
       <h2 class="text-5xl text-center py-8 font-bold">Crafting Robust Web Solutions</h2>
       <ImgPreloader
-        min-img-url="/img/me-min.png"
-        orig-img-url="/img/me.png"
+        min-img-url="./img/me-min.png"
+        orig-img-url="./img/me.png"
         :img-width="705"
         img-alt="Me at photo"
       />

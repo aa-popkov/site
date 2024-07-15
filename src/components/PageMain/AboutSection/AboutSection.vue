@@ -10,8 +10,8 @@ import ImgPreloader from '@/components/Shared/ImgPreloader.vue'
       <div class="w-1/2 hidden md:block">
         <ImgPreloader
           class="transform -scale-x-100"
-          min-img-url="/img/me-min.png"
-          orig-img-url="/img/me.png"
+          min-img-url="./img/me-min.png"
+          orig-img-url="./img/me.png"
           :img-width="705"
           img-alt="Me at photo"
         />
